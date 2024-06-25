@@ -1,6 +1,12 @@
 <!-- app/views/movies/show.html.erb -->
 
-<form action="/modify_movie/<%= @the_movie.id %>"  method="post" data-turbo="false"></form>
+<form action="/movies/<%= @the_movie.id %>" method="post" data-turbo="false">
+
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <input type="hidden" name="_method" value="patch">
+
+</form>
 
 <div>
   <div>
@@ -16,7 +22,7 @@
       </div>
 
       <div>
-        <a href="/delete_movie/<%= @the_movie.id %>">
+        <a href="/movies/<%= @the_movie.id %>" data-turbo-method="delete">
           Delete movie
         </a>
       </div>
@@ -63,14 +69,13 @@
 
 <hr>
 
-
 <div>
   <div>
     <h2>
       Edit movie
     </h2>
 
-    <form action="/modify_movie/<%= @the_movie.id %>"  method="post" >
+    <form action="/movies/<%= @the_movie.id %>"  method="post" data-turbo="false">
       <div>
         <label for="title_box">
           Title
@@ -91,7 +96,7 @@
         <input type="checkbox" id="released_box" name="query_released" value="1" <%= "checked" if @the_movie.released %>>
 
         <label for="released_box">
-            Released
+          Released
         </label>
       </div>
 
