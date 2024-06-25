@@ -1,18 +1,20 @@
 <!-- app/views/movies/edit.html.erb -->
 
 <h2>
-  Add a new movie
+  Edit movie
 </h2>
 
-<form action="/movies" method="post">
+<form action="/movies/<%= @the_movie.id %>" method="post" data-turbo="false">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <input type="hidden" name="_method" value="patch">
 
   <div>
     <label for="title_box">
       Title
     </label>
 
-    <input type="text" id="title_box" name="query_title">
+    <input type="text" id="title_box" name="query_title" value="<%= @the_movie.title %>">
   </div>
 
   <div>
@@ -20,16 +22,18 @@
       Description
     </label>
 
-    <textarea id="description_box" name="query_description" rows="3"></textarea>
+    <textarea id="description_box" name="query_description"><%= @the_movie.description %></textarea>
   </div>
 
   <div>
-    <input type="checkbox" id="released_box" name="query_released" value="1">
+    <input type="checkbox" id="released_box" name="query_released" value="1" <%= "checked" if @the_movie.released %>>
 
-    <label for="released_box">Released</label>
+    <label for="released_box">
+      Released
+    </label>
   </div>
 
   <button>
-    Create movie
+    Update movie
   </button>
 </form>
